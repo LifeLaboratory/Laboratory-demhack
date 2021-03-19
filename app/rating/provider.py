@@ -20,14 +20,14 @@ class Provider(bp.Provider):
     , g.money as money
     , g.round as round
     , g.time_close as time_close
-    , u.user_id as user_id
+    , u.id_user as id_user
     , u.login as user_name
     , u.pic as user_pic
     , p.name as person_name 
     , p.description as person_descr
     , p.pic as person_pic
   from get_users gu
-  join users u on (gu.user_id = u.user_id)
+  join users u on (gu.id_user = u.id_user)
   join lateral (
       select
         health
