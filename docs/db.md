@@ -44,7 +44,7 @@
   'id_person': int,
   'name': str,
   'description': str, # описание персонажа
-  'healt': float,
+  'health': float,
   'money': int,
   'point': int,
   'pic': str # ссылка на картинку
@@ -62,7 +62,7 @@
 ```sql
   'id_event': int,
   'description': text,
-  'healt': float,
+  'health': float,
   'money': int, # Количество денег
   'point': int, # Количество очков
   'tags': text[]
