@@ -4,7 +4,7 @@
 
 CREATE TABLE public.person
 (
-  id_person integer NOT NULL DEFAULT nextval('person_id_person_seq'::regclass),
+  id_person integer NOT NULL,
   name text,
   description text,
   pic text,

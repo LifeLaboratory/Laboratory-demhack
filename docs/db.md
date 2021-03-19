@@ -1,6 +1,6 @@
-# Структуруа базы данных
+# Структура базы данных
 
-### Пользователь
+### users
 ```sql
   'id_user': str,
   'login': str,
@@ -8,7 +8,7 @@
   'pic': str # Ссылка на картинку
 ```
 
-### Игра
+### game
 ```sql
   'id_game': int,
   'id_user': int,
@@ -23,24 +23,26 @@
 ```
 
 
-### Вопросы
+### question
 ```sql
   'id_question': int,
   'description': text,
   'pic': text, # Ссылка на картинку
-  'answer': [
+  'answer': {
+  '0':
     {
       'text': text,
       'health': float,   # Здоровье
       'point': int, # количество очков
       'money': int, # количество денег
+      'id_event': int # 
     },
-  ],
+  },
   'tags': text[]
 ```
 
 
-### Персонажи
+### person
 ```sql
   'id_person': int,
   'name': str,
@@ -52,24 +54,25 @@
 ```
 
 
-### Сессии пользователей
+### session
 ```sql
   'id_user': int,
   'id_session': text
 ```
 
 
-### События
+### event
 ```sql
   'id_event': int,
   'description': text,
   'health': float,
   'money': int, # Количество денег
   'point': int, # Количество очков
-  'tags': text[]
+  'tags': text[],
+  'round': int  # через сколько рауднов стрельнет
 ```
 
-### Связь 
+### event_to_game 
 
 ```sql
   'id_event': int,
