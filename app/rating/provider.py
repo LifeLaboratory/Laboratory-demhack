@@ -1,0 +1,47 @@
+import app.base.provider as bp
+
+
+class Provider(bp.Provider):
+    def __init__(self):
+        super().__init__()
+        self.table_name = 'rating'
+        self.field = ['login, password, name', 'email']
+
+    def get_top_users(self):
+        self.query = f'''
+  with get_users as(
+      select
+        distinct id_user
+      from game
+  )
+  select
+    g.point as point
+    , g.health as healt
+    , g.money as money
+    , g.round as round
+    , g.time_close as time_close
+    , u.user_id as user_id
+    , u.login as user_name
+    , u.pic as user_pic
+    , p.name as preson_name 
+    , p.description as person_descr
+    , p.pic as preson_pic
+  from get_users gu
+  join users u on (gu.user_id = u.user_id)
+  join lateral (
+      select
+        health
+        , point
+        , money
+        , id_person
+        , time_close
+        , round
+      from game g
+      where g.id_user = u.id_user
+      order by g.point desc
+      limit 1
+  ) g on True
+  join person p on (g.id_person = p.id_person)
+  order by g.point desc
+'''
+        return self.execute()
