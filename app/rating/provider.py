@@ -23,9 +23,9 @@ class Provider(bp.Provider):
     , u.user_id as user_id
     , u.login as user_name
     , u.pic as user_pic
-    , p.name as preson_name 
+    , p.name as person_name 
     , p.description as person_descr
-    , p.pic as preson_pic
+    , p.pic as person_pic
   from get_users gu
   join users u on (gu.user_id = u.user_id)
   join lateral (
