@@ -16,7 +16,7 @@ class Provider(bp.Provider):
   )
   select
     g.point as point
-    , g.health as healt
+    , g.health as health
     , g.money as money
     , g.round as round
     , g.time_close as time_close
