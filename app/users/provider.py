@@ -85,6 +85,13 @@ game_history as (
     where id_user = {id_user}
     order by 2 desc nulls first
   ) g
+),
+continue_game as (
+  select True as "continue"
+  from game
+  where id_user = {id_user}
+    and status is true 
+  limit 1
 )
 select
   id_user
@@ -94,6 +101,7 @@ select
   , coalesce(max_point, 0) as max_point
   , pic
   , coalesce((select * from game_history limit 1), '{{}}'::json[]) as game_history
+  , (select coalesce("continue", false) from continue_game limit 1) as "continue"
 from users u
 left join info_user_game iug using(id_user)
 left join position_user pu using(id_user)
