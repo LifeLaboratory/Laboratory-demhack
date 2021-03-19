@@ -120,6 +120,7 @@ class Provider:
         for k, v in args.items():
             alert_items = ["'", '"', ';', '-', '*', 'drop', 'select', '=', 'insert']
             if isinstance(v, str):
+                args[k] = f"'{args[k]}'"
                 for alert in alert_items:
                     if alert in v:
                         args[k] = args[k].replace(alert, '')
