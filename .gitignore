@@ -116,3 +116,4 @@ dist
 gradlew*
 build
 gradle
+.swp
