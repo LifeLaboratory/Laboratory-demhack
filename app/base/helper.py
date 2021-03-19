@@ -1,4 +1,5 @@
 from app.session.processor import Processor as Session
+# from app.person.processor import Processor as Person
 
 
 def header_option():
@@ -23,3 +24,6 @@ def check_session(data, header):
         if id_user:
             data['id_user'] = id_user.get('id_user')
 
+
+# def get_person(id_person):
+#     return Person().get_person(id_person)
