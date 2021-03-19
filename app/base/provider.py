@@ -9,12 +9,13 @@ class Provider:
     """
     Базовый класс для работы с БД
     """
-    def __init__(self):
+    def __init__(self, sql_root=None):
         """
         При совершение запроса
         """
         self.query = None
         self.connect, self.current_connect = Provider.connect()
+        self.sql_root = sql_root
 
     def __del__(self):
         """
@@ -27,6 +28,10 @@ class Provider:
     def import_sql(sql_root, name):
         with open(os.path.join(sql_root, name), encoding='utf-8', mode='r') as _fne:
             return _fne.read()
+
+    def exec_by_file(self, name, params):
+        query = self.import_sql(self.sql_root, name)
+        return self.exec(query, params)
 
     def execute(self):
         if os.environ["IS_DEBUG"]:
