@@ -65,9 +65,7 @@ game_history as (
             'time', time,
             'round', round,
             'health', health,
-            'food', food,
-            'leisure', leisure,
-            'communication', communication,
+            'money', point,
             'point', point,
             'pic', pic,
             'title', name
@@ -78,10 +76,8 @@ game_history as (
          , time_close as time
          , round
          , g.health
-         , g.food
-         , g.leisure
-         , g.communication
-         , point
+         , g.money
+         , g.point
          , p.pic
          , p.name
     from game g

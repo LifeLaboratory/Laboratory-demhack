@@ -1,5 +1,6 @@
 from app import app
 from app.users import view
+from app.person import view
 
 
 if __name__ == "__main__":

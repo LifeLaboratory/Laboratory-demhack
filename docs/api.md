@@ -26,10 +26,8 @@ response:
       'id_game': int,
       'time': str,
       'round': int, # Номер раунда игры
-      'health': float,   # Здоровье
-      'food': float,     # Питание
-      'leisure': float,  # Досуг
-      'communication': float,   # Общение
+      'health': int,   # Здоровье
+      'money': int,    # Деньги
       'point': int # Количество очков, заработанных за игру.
     }
   ]
@@ -49,10 +47,8 @@ response:
       'id_game': int,
       'time': str,
       'round': int, # Номер раунда игры
-      'health': float,   # Здоровье
-      'food': float,     # Питание
-      'leisure': float,  # Досуг
-      'communication': float,   # Общение
+      'health': int,   # Здоровье
+      'money': int,    # Деньги
       'point': int # Количество очков, заработанных за игру.
     }
   ]
@@ -89,10 +85,8 @@ response:
   'name': str,
   'description': str, # описание персонажа
   'pic': str, # ссылка на картинку
-  'health': float,  # Здоровье
-  'food': float,  # Питание
-  'leisure': float,  # Досуг
-  'communication': float,  # Общение
+  'health': int,  # Здоровье
+  'money': int,    # Деньги
   'value': int,  # количество денег
 }
 ```
@@ -107,10 +101,8 @@ response:
             'id_user': int,
             'name': str,
             'time': str,
-            'health': float,  # Здоровье
-            'food': float,  # Питание
-            'leisure': float,  # Досуг
-            'communication': float,  # Общение
+            'health': int,  # Здоровье
+            'money': int,    # Деньги
             'point': int,  # Количество очков, заработанных за игру.
             'value': int,  # количество денег
         }
@@ -125,18 +117,19 @@ response:
 {
   'id_question': int,
   'description': str,
-  'left_answer': str,  # Первый ответ
-  'right_answer': str,  # Второй ответ
+  'answer': [
+    { 
+      'id': int,
+      'description': text,
+      'health': int,   # Здоровье
+      'point': int, # количество очков
+      'money': int, # количество денег
+    },
+  ]
   'round': int, # Номер раунда игры
-  'health': float,   # Здоровье
-  'food': float,     # Питание
-  'leisure': float,  # Досуг
-  'communication': float,   # Общение
+  'health': int,   # Здоровье
+  'money': int,    # Деньги
   'point': int, # количество очков
-  'value': int, # количество денег
-  'call': bool, # можем ли позвонить? 
-  'worked': bool, # можем ли работать? 
-  'covid': bool, # заражены? 
 }
 
 -> POST /api/game # Запуск новой игры
@@ -155,16 +148,9 @@ response
   'left_answer': str,  # Первый ответ
   'right_answer': str,  # Второй ответ
   'round': int, # Номер раунда игры
-  'health': float,   # Здоровье
-  'food': float,     # Питание
-  'leisure': float,  # Досуг
-  'communication': float,   # Общение
+  'health': int,   # Здоровье
+  'money': int, # количество денег
   'point': int, # количество очков
-  'value': int, # количество денег
-  'call': bool, # можем ли позвонить? 
-  'worked': bool, # можем ли работать? 
-  'covid': bool, # заражены? 
-  'event': str, # Событие, которое необходимо отобразить пользователю
 }
 
 GET /api/game/events # Получить события, которые произошли в игре
@@ -191,14 +177,8 @@ response:
   'right_answer': str,  # Второй ответ
   'round': int, # Номер раунда игры
   'health': float,   # Здоровье
-  'food': float,     # Питание
-  'leisure': float,  # Досуг
-  'communication': float,   # Общение
+  'money': int, # количество денег
   'point': int, # количество очков
-  'value': int, # количество денег
-  'call': bool, # можем ли позвонить? 
-  'worked': bool, # можем ли работать? 
-  'covid': bool, # заражены? 
 }
 
 ```
