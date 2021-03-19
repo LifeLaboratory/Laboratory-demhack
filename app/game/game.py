@@ -22,6 +22,7 @@ class Game:
         }
         self.db.exec_by_file('insert_event_to_game.sql', params)
         params = {
+            'id_question': submit.get('id_question'),
             'id_game': submit.get('id_game'),
             'health': submit.get('health') or 0,
             'point': submit.get('point') or 0,
