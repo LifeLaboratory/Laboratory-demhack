@@ -19,7 +19,7 @@
   'health': float,   # Здоровье
   'point': int, # количество очков
   'money': int, # количество денег
-  'id_person': int,
+  'id_person': int 
 ```
 
 
