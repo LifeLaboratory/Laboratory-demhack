@@ -1,5 +1,6 @@
 from app.game.provider import Provider
 from app.base.helper import create_session
+from app.game.game import Game
 
 
 class Processor:
@@ -24,4 +25,5 @@ class Processor:
 
     def start_new_game(self, data):
         self.provider.end_game(data.get('id_user'))
-        # Запустить игру
+        Game().start_game(data)
+        return self.get_game_info(data)
