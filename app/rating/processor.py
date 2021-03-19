@@ -9,7 +9,7 @@ class Processor:
         users_ratings = self.provider.get_top_users()
         ratings = []
         my_user_pos = None
-        for k in range(20):
+        for k in range(len(users_ratings) if len(users_ratings) < 20 else 20):
             users_ratings[k]['id'] = k+1
             ratings.append(users_ratings[k])
         if user_id is None:
