@@ -21,3 +21,7 @@ class Processor:
 
     def execute_game_action(self, data):
         return self.provider.execute_game_action(data)
+
+    def start_new_game(self, data):
+        self.provider.end_game(data.get('id_user'))
+        # Запустить игру

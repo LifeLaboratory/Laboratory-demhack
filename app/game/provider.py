@@ -27,3 +27,17 @@ class Provider(bp.Provider):
     def check_session(self, session):
         self.query = f''''''
         return self.execute()[0]
+
+    def end_game(self, id_user):
+        """
+        Метод для завершения всех игр пользователя
+        :param id_user:
+        :return:
+        """
+        self.query = f'''
+update game
+set status = false
+where id_user = {id_user}
+  and status is true
+        '''
+        return self.execute()
