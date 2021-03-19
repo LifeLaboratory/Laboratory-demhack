@@ -23,6 +23,11 @@ class Provider:
         self.connect.commit()
         self.connect.close()
 
+    @staticmethod
+    def import_sql(sql_root, name):
+        with open(os.path.join(sql_root, name), encoding='utf-8', mode='r') as _fne:
+            return _fne.read()
+
     def execute(self):
         if os.environ["IS_DEBUG"]:
             print(self.query)
