@@ -4,7 +4,8 @@
 ```sql
   'id_user': str,
   'login': str,
-  'password': str
+  'password': str,
+  'pic': str # Ссылка на картинку
 ```
 
 ### Игра
@@ -14,14 +15,10 @@
   'id_question': int,
   'time_open': timestamp,
   'time_close': timestamp,
-  'time_close': timestamp,
   'round': int, # Номер раунда игры
-  'Health': float,   # Здоровье
-  'food': float,     # Питание
-  'Leisure': float,  # Досуг
-  'Communication': float,   # Общение
+  'health': float,   # Здоровье
   'point': int, # количество очков
-  'value': int, # количество денег
+  'money': int, # количество денег
 ```
 
 
@@ -29,22 +26,16 @@
 ```sql
   'id_question': int,
   'description': text,
-  'left': {
-    'Health': float,   # Здоровье
-    'food': float,     # Питание
-    'Leisure': float,  # Досуг
-    'Communication': float,   # Общение
-    'point': int, # количество очков
-    'value': int, # количество денег
-  },
-  'right': {
-    'Health': float,   # Здоровье
-    'food': float,     # Питание
-    'Leisure': float,  # Досуг
-    'Communication': float,   # Общение
-    'point': int, # количество очков
-    'value': int, # количество денег
-  }
+  'pic': text, # Ссылка на картинку
+  'answer': [
+    {
+      'text': text,
+      'health': float,   # Здоровье
+      'point': int, # количество очков
+      'money': int, # количество денег
+    },
+  ],
+  'tags': text[]
 ```
 
 
@@ -53,6 +44,9 @@
   'id_person': int,
   'name': str,
   'description': str, # описание персонажа
+  'healt': float,
+  'money': int,
+  'point': int,
   'pic': str # ссылка на картинку
 ```
 
@@ -68,6 +62,16 @@
 ```sql
   'id_event': int,
   'description': text,
-  'id_session': text
+  'healt': float,
+  'money': int, # Количество денег
+  'point': int, # Количество очков
+  'tags': text[]
 ```
 
+### Связь 
+
+```sql
+  'id_event': int,
+  'id_game': int,
+  'round': int
+```

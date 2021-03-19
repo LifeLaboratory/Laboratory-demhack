@@ -51,7 +51,7 @@ def login():
 @app.route(PREFIX + '/register', methods=['POST', 'OPTIONS'])
 def register():
     if request.method == 'OPTIONS':
-        return {}, header_option()
+        return jsonify({}), header_option()
     data = request.json
     print(f'data = {data}')
     return jsonify(Processor().create(data)), header_option()
