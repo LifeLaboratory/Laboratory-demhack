@@ -29,7 +29,8 @@ def get_game_events():
         print(request.method)
         return jsonify({}), header_option()
 
-    return jsonify({'event': Processor().get_game_events()}), header_option()
+    id_user = session_to_id_user(request.headers)
+    return jsonify({'event': Processor().get_game_events(id_user)}), header_option()
 
 
 @app.route(PREFIX + '/action', methods=['POST', 'OPTIONS'])
@@ -37,6 +38,7 @@ def execute_game_action():
     if request.method == 'OPTIONS':
         print(request.method)
         return jsonify({}), header_option()
+
     data = request.json
     print(f'data = {data}')
     return jsonify(Processor().execute_game_action(data)), header_option()
