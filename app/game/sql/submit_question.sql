@@ -6,7 +6,8 @@ select
   g.round cur_round,
   g.id_game,
   e.id_event,
-  g.id_question
+  g.id_question,
+  g.id_user
 from
   game g
 

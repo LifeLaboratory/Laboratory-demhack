@@ -17,6 +17,17 @@ class Game:
         submit = self.db.exec_by_file('submit_question.sql', params)[0]
         params = {
             'id_event': submit.get('id_event'),
+            'id_question': submit.get('id_question'),
+            'id_game': submit.get('id_game'),
+            'id_user': submit.get('id_user'),
+            'health': submit.get('health') or 0,
+            'point': submit.get('point') or 0,
+            'money': submit.get('money') or 0,
+            'answer': params.get('answer'),
+        }
+        self.db.exec_by_file('insert_history_question.sql', params)
+        params = {
+            'id_event': submit.get('id_event'),
             'id_game': submit.get('id_game'),
             'round': submit.get('event_round') + submit.get('cur_round'),
         }
