@@ -35,10 +35,10 @@ ORDER BY etg.id_event_to_game ASC
 LIMIT 1
 '''
         answer = self.execute()[0]
-        for answ in answer.get('answer'):
-            answ.pop('health')
-            answ.pop('point')
-            answ.pop('money')
+        for answ in range(len(answer.get('answer'))):
+            answer.get('answer')[str(answ)].pop('health')
+            answer.get('answer')[str(answ)].pop('point')
+            answer.get('answer')[str(answ)].pop('money')
         return answer
 
     def delete_event_to_game(self, id_event_to_game):
