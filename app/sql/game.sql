@@ -4,7 +4,7 @@
 
 CREATE TABLE public.game
 (
-  id_game integer NOT NULL DEFAULT nextval('game_id_game_seq'::regclass),
+  id_game integer NOT NULL,
   id_user integer NOT NULL,
   id_question integer NOT NULL DEFAULT 0,
   time_open timestamp without time zone DEFAULT now(),

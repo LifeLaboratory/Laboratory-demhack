@@ -124,12 +124,12 @@ response:
   'answer': [
     { 
       'id': int,
-      'description': text,
+      'description': str,
       'health': int,   # Здоровье
       'point': int, # количество очков
       'money': int, # количество денег
     },
-  ]
+  ],
   'round': int, # Номер раунда игры
   'health': int,   # Здоровье
   'money': int,    # Деньги
@@ -143,46 +143,23 @@ response:
 
 -> POST /api/game/question
 {
-  'answer': str # левый или правый ответ 
+  'answer': int
 }
 response 
 {
   'id_question': int,
   'description': str,
-  'left_answer': str,  # Первый ответ
-  'right_answer': str,  # Второй ответ
+  'answer': [
+    { 
+      'id': int,
+      'description': str,
+      'health': int,   # Здоровье
+      'point': int, # количество очков
+      'money': int, # количество денег
+    },
+  ],
   'round': int, # Номер раунда игры
   'health': int,   # Здоровье
   'money': int, # количество денег
   'point': int, # количество очков
 }
-
-GET /api/game/events # Получить события, которые произошли в игре
-response 
-{
-  'event': [
-    {
-      'element': str, # какой элемент изменился
-      'description': str # какое сообщение вывести
-    }
-  ]
-}
-
-
--> POST /api/game/action # Выполнить действие
-{
-  'action': str # worked/call_friend/call_delivery
-}
-response:
-{
-  'id_question': int,
-  'description': str,
-  'left_answer': str,  # Первый ответ
-  'right_answer': str,  # Второй ответ
-  'round': int, # Номер раунда игры
-  'health': float,   # Здоровье
-  'money': int, # количество денег
-  'point': int, # количество очков
-}
-
-```
