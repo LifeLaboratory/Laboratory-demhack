@@ -1,15 +1,12 @@
 select
-  (q.answer -> {answer}::text ->> 'health')::int health_positive,
-  (q.answer -> {answer}::text ->> 'point')::int point_positive,
-  (q.answer -> {answer}::text ->> 'money')::int money_positive,
-  (q.answer -> {answer}::text ->> 'id_event')::int id_event,
-  e.health health_negative,
-  e.point point_negative,
-  e.money money_negative,
+  (q.answer -> {answer}::text ->> 'health')::int health,
+  (q.answer -> {answer}::text ->> 'point')::int point,
+  (q.answer -> {answer}::text ->> 'money')::int money,
   e.round event_round,
   g.round cur_round,
   g.id_game,
-  e.id_event
+  e.id_event,
+  g.id_question
 from
   game g
 
