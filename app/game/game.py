@@ -8,7 +8,7 @@ __author__ = 'Крылосов А.А.'
 class Game:
 
     def __init__(self):
-        self.db = Provider('./game/sql')
+        self.db = Provider('app/game/sql')
 
     def start_game(self, params):
         self.db.exec_by_file('start_game.sql', params)
