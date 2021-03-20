@@ -6,6 +6,38 @@
       </div>
     </div>
 
+    <div class="bottom-menu">
+      <a-row class="profile-game">
+        <a-col :span="5">
+          <a-avatar :size="128" :src="user.pic" style="margin: 15px;"/>
+        </a-col>
+        <a-col :span="17" class="stats-game" style="font-size: 14pt; padding-bottom: 15px;">
+          <table width="100%" border="1" style="font-size: 20pt;">
+            <tr>
+              <th style="padding: 5px;">
+                <center>Информационное здоровье</center>
+              </th>
+              <th style="padding: 5px;">
+                <center>Деньги</center>
+              </th>
+              <th style="padding: 5px;">
+                <center>Очки</center>
+              </th>
+              <th style="padding: 5px;">
+                <center>Прожито дней</center>
+              </th>
+            </tr>
+            <tr>
+              <td style="padding: 5px;"><center>{{user.health}}</center></td>
+              <td style="padding: 5px;"><center>{{user.money}}₽</center></td>
+              <td style="padding: 5px;"><center>{{user.point}}</center></td>
+              <td style="padding: 5px;"><center>{{user.round}}</center></td>
+            </tr>
+          </table>
+        </a-col>
+      </a-row>
+    </div>
+
     <div class="outer" style="height:80vh; width: 90%; margin-left: 5%" v-if="descr != ''">
       <div class="inner">
 
@@ -33,35 +65,6 @@
       </div>
     </div>
 
-    <div class="bottom-menu">
-      <a-row class="profile-game">
-        <a-col :span="5">
-          <a-avatar :size="128" :src="this.profileUser.pic" style="margin: 15px;"/>
-        </a-col>
-        <a-col :span="15" class="stats-game" style="font-size: 14pt; padding-bottom: 15px;">
-          <div>
-            <div style="display: inline-block">
-              <a-icon type="heart" theme="twoTone" twoToneColor="#eb2f96"/>
-            </div>
-            <a-progress :percent="user.health" :strokeColor="{  '0%': '#eb2f96', '100%': '#eb2f96'}"/>
-          </div>
-
-          <div>
-            <div style="display: inline-block">
-              <a-icon type="dollar" style="color:rgb(235, 134, 47);"/>
-            </div>
-            <a-progress :percent="user.money" :strokeColor="{  '0%': 'rgb(235, 134, 47)', '100%': 'rgb(235, 134, 47)'}"/>
-          </div>
-
-          <div>
-            <div style="display: inline-block">
-              <a-icon type="smile" theme="twoTone" twoToneColor="rgb(62, 181, 98)"/>
-            </div>
-            <a-progress :percent="user.point" :strokeColor="{  '0%': 'rgb(62, 181, 98)', '100%': 'rgb(62, 181, 98)'}"/>
-          </div>
-        </a-col>
-      </a-row>
-    </div>
   </div>
 </template>
 
@@ -108,11 +111,14 @@ export default {
       this.right = res.right_answer
 
       this.pic = res.pic
+      this.user.pic = res.pic
       this.user.name = res.name
       this.user.health = res.health
       this.user.money = res.money
       this.user.point = res.point
       this.user.round = res.round
+      this.answers = res.answer;
+      this.end_game = res.end_game;
 
       let profile = getProfile()
       if (profile !== false) {
@@ -134,17 +140,30 @@ export default {
       this.left = res.left_answer
       this.right = res.right_answer
       this.answers = res.answer;
-      console.log(this.answers);
+      this.end_game = res.end_game;
 
       this.pic = res.pic
       this.user.health = res.health
       this.user.money = res.money
       this.user.point = res.point
       this.user.round = res.round
+
+
+      let profile = getProfile()
+      if (profile !== false) {
+        this.profileUser = profile;
+        profile.then(val => {
+          this.profileUser = val
+          console.log("Профиль: ", this.profileUser)
+          this.user.pic = this.profileUser.pic;
+          this.user.name = this.profileUser.names;
+        });
+      }
     },
 
     async sendAnswer(ans) {
       this.dis = true
+      this.pic = undefined;
       let res = await sendAnswer(localStorage.getItem('session'), ans)
       if (res.end === true) {
         this.$warning({
@@ -157,31 +176,16 @@ export default {
       console.log(this.user.health)
       console.log(res.health - this.user.health)
 
-      let Shealth = res.health - this.user.health
-      let Seat = res.food - this.user.eat
-      let Scomm = res.communication - this.user.comm
-      let Shome = res.leisure - this.user.home
-
       this.day = res.round
       this.descr = res.description
       this.left = res.left_answer
       this.right = res.right_answer
+      this.answers = res.answer;
 
-
-      let profile = getProfile()
-      if (profile !== false) {
-        this.profileUser = profile;
-        profile.then(val => {
-          this.profileUser = val
-          console.log("Профиль: ", this.profileUser.pic);
-          this.user.pic = this.profileUser.pic;
-          this.user.name = this.profileUser.names;
-          this.user.health = this.profileUser.health;
-          this.user.money = this.profileUser.money;
-          this.user.point = this.profileUser.point;
-          this.user.round = this.profileUser.round;
-        });
-      }
+      this.user.health = res.health
+      this.user.money = res.money
+      this.user.point = res.point
+      this.user.round = res.round
 
       this.dis = false
     }
@@ -239,7 +243,7 @@ export default {
 .inner {
   width: 100%;
   display: inline-block;
-  vertical-align: middle;
+  margin-top: 50px;
 }
 
 .outer {
@@ -297,8 +301,7 @@ export default {
   width: 50%;
   min-width: 550px;
   background: rgba(255, 255, 255, 0.8);
-  position: absolute;
-  bottom: 0px;
+  margin: 50px auto 0;
 }
 
 </style>

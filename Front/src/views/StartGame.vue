@@ -8,7 +8,7 @@
           </a-col>
           <a-col :span="16" class="mini-rating">
             <div style="font-size: 20pt">Имя: {{profileUser.names}}</div>
-            <div style="font-size: 20pt">Игры сыграно: {{profileUser.count_game}}</div>
+            <div style="font-size: 20pt">Игр сыграно: {{profileUser.count_game}}</div>
             <div style="font-size: 20pt">Максимально прожито дней: {{profileUser.max_point}}</div>
           </a-col>
         </a-row>
@@ -18,16 +18,19 @@
           <a-button @click="toRating" block>Рейтинг</a-button>
         </div>
 
+        <h1 block style="margin-top: 25px;">Статистика прожитых дней</h1>
+        <line-chart :chart-data="this.progress" :height="100" style="margin-top: 25px;"></line-chart>
+
         <div class="person-list">
-          <h1 block>История выживания</h1>
+          <h1 block>История игр</h1>
           <div v-for="item in profileUser.game_history" style="border: 1px solid black;">
             <a-row>
               <a-col :span="4">
-                <img :src="item.pic" height="40" width="40" style="margin-top: 5px;"/>
+                <img :src="item.pic" height="60" width="60" style="margin-top: 5px;"/>
                 <h3>{{item.name}}</h3>
               </a-col>
               <a-col :span="20">
-                <table width="100%" border="1">
+                <table width="100%" border="1" style="font-size: 20pt;">
                   <tr>
                     <th>Информационное здоровье</th>
                     <th>Деньги</th>
@@ -44,9 +47,6 @@
               </a-col>
             </a-row>
           </div>
-
-          <h1 block style="margin-top: 25px;">Статистика прожитых дней</h1>
-          <line-chart :chart-data="this.progress" :height="100" style="margin-top: 25px;"></line-chart>
 
         </div>
       </div>

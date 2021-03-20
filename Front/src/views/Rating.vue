@@ -64,7 +64,7 @@
         </a-row>
 
         <div class="person-list">
-          <h1 block>История выживания</h1>
+          <h1 block>История игр</h1>
           <div v-for="item in this.selectPerson.game_history" style="border: 1px solid black;">
             <table width="100%" border="1">
               <tr>
