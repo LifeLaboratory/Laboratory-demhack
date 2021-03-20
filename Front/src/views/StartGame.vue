@@ -44,6 +44,10 @@
               </a-col>
             </a-row>
           </div>
+
+          <h1 block style="margin-top: 25px;">Статистика прожитых дней</h1>
+          <line-chart :chart-data="this.progress" :height="100" style="margin-top: 25px;"></line-chart>
+
         </div>
       </div>
   </a-col>
@@ -53,13 +57,18 @@
 <script>
   import {getPerson, getProfile} from "../api/auth";
   import { getGame } from "@/api/game"
+  import LineChart from '../store/LineChart.js'
 export default {
+    components: {
+      LineChart,
+    },
   data() {
     return {
       newGame: Boolean,
       isLoaded: false,
       persons: [],
       profileUser: undefined,
+      progress: null,
     }
   },
   methods: {
@@ -81,6 +90,17 @@ export default {
         profile.then(val => {
           this.profileUser = val
           console.log("Профиль: ", this.profileUser)
+          var tmpArr = [];
+          val.game_history.forEach(param => {
+            tmpArr.push({
+              data: [param.round, param.round],
+              backgroundColor: '#1b68b3'
+            });
+          });
+          Chart.defaults.global.legend.display = false;
+          this.progress = {
+            datasets: tmpArr
+          };
         });
       } else {
         this.$message.error('Ошибка получения профиля');
