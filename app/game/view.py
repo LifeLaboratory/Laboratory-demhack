@@ -27,4 +27,6 @@ def send_game_answer():
         return jsonify({}), header_option()
 
     json_data = request.json
-    return jsonify(Processor().send_game_answer(json_data)), header_option()
+    id_user = session_to_id_user(request.headers)
+    json_data['id_user'] = id_user
+    return jsonify(Processor().send_game_answer(json_data), header_option())

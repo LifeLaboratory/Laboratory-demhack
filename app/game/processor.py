@@ -18,7 +18,8 @@ class Processor:
             return {'error': 'Такой игры нет'}
 
     def send_game_answer(self, data):
-        return self.provider.send_game_answer(data)
+        Game().submit_question(data)
+        return self.get_game_info(data)
 
     def get_game_events(self, id_user):
         return self.provider.get_game_events(id_user)
