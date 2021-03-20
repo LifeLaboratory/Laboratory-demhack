@@ -1,8 +1,8 @@
 <template>
 <a-row type="flex" justify="center">
-  <a-col :span="20">
+  <a-col :span="35">
     <div class="box">
-      <h2 style="font-size: 32pt;">Авторизация</h2>
+      <h2 style="font-size: 20pt;">Авторизация</h2>
         <a-form
           id="components-form"
           :form="form"
@@ -16,7 +16,7 @@
                 { rules: [{ required: true, message: 'Введите имя!' }] },
               ]"
               placeholder="Username"
-              style="font-size: 28pt; height: 60px"
+              style="font-size: 20pt; height: 60px"
             >
               <a-icon slot="prefix" type="user" style="color: rgba(0,0,0,.25);" />
             </a-input>
@@ -29,12 +29,12 @@
               ]"
               type="password"
               placeholder="Password"
-              style="font-size: 28pt; height: 60px"
+              style="font-size: 20pt; height: 60px"
             >
               <a-icon slot="prefix" type="lock" style="color: rgba(0,0,0,.25)" />
             </a-input>
           </a-form-item>
-          <a-form-item style="font-size: 28pt;">
+          <a-form-item style="font-size: 20pt;">
             <a-button type="primary" html-type="submit" class="form-button" style="margin-bottom: 15px;">
               Вход
             </a-button>
