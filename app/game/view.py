@@ -13,11 +13,12 @@ def get_game_info():
         return jsonify({}), header_option()
     if request.method == 'GET':
         id_user = session_to_id_user(request.headers)
-        return jsonify(Processor().get_game_info(id_user), header_option())
+        return jsonify(Processor().get_game_info(id_user)), header_option()
     if request.method == 'POST':
         data = request.json
         check_session(data, request.headers)
-        return jsonify(Processor().start_new_game(data), header_option())
+        data = jsonify(Processor().start_new_game(data)), header_option()
+        return data
 
 
 @app.route(PREFIX + '/question', methods=['POST', 'OPTIONS'])

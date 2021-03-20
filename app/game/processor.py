@@ -10,10 +10,10 @@ class Processor:
     def get_game_info(self, data):
         game = self.provider.get_game_info(data)
         if game:
-            if isinstance(game[0].get('event'), dict):
-                self.provider.delete_event_to_game(game[0].get('event').get('id_event_to_game'))
-                game[0].get('event').pop('id_event_to_game')
-            return game[0]
+            if isinstance(game.get('event'), dict) and game.get('event'):
+                self.provider.delete_event_to_game(game.get('event').get('id_event_to_game'))
+                game.get('event').pop('id_event_to_game')
+            return game
         else:
             return {'error': 'Такой игры нет'}
 
@@ -30,4 +30,4 @@ class Processor:
     def start_new_game(self, data):
         self.provider.end_game(data.get('id_user'))
         Game().start_game(data)
-        return self.get_game_info(data)
+        return self.get_game_info(data.get('id_user'))
