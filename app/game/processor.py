@@ -10,6 +10,9 @@ class Processor:
     def get_game_info(self, data):
         game = self.provider.get_game_info(data)
         if game:
+            if isinstance(game[0].get('event'), dict):
+                self.provider.delete_event_to_game(game[0].get('event').get('id_event_to_game'))
+                game[0].get('event').pop('id_event_to_game')
             return game[0]
         else:
             return {'error': 'Такой игры нет'}

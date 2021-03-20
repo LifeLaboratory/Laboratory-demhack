@@ -21,9 +21,9 @@ SELECT
 , g.money::int4 money
 , g.point::int4 point
 , CASE WHEN e.id_event is not null THEN
-  json_build_object('id_event', e.id_event, 'description', e.description, 'money', e.money, 'health', e.health, 'point', e.point)::json
+  json_build_object('id_event', e.id_event, 'description', e.description, 'money', e.money, 'health', e.health, 'point', e.point, 'id_event_to_game', etg.id_event_to_game)::json
 ELSE
-  json_build_object()
+  json_build_object()::json
 END as event
 
 FROM game g
@@ -33,6 +33,12 @@ LEFT JOIN event e on etg.id_event = e.id_event and e.tags && q.tags
 WHERE g.status = True and g.id_user = {id_user}
 ORDER BY etg.id_event_to_game ASC
 LIMIT 1
+'''
+        return self.execute()[0]
+
+    def delete_event_to_game(self, id_event_to_game):
+        self.query = f'''
+DELETE FROM event_to_game WHERE id_event_to_game = {id_event_to_game} RETURNING id_event
 '''
         return self.execute()[0]
 
