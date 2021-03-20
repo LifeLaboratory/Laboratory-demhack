@@ -16,12 +16,13 @@
           <a-button @click="toChoicePers" block>Начать игру</a-button>
           <a-button v-if="profileUser.continue" @click="toGame" block>Продолжить игру</a-button>
           <a-button @click="toRating" block>Рейтинг</a-button>
+          <a-button @click="toMain" block>Выход</a-button>
         </div>
 
-        <h1 block style="margin-top: 25px;">Статистика прожитых дней</h1>
-        <line-chart :chart-data="this.progress" :height="100" style="margin-top: 25px;"></line-chart>
+        <h1 block style="margin-top: 25px;" v-if="profileUser.game_history.length !== 0">Статистика прожитых дней</h1>
+        <line-chart v-if="profileUser.game_history.length !== 0" :chart-data="this.progress" :height="100" style="margin-top: 25px;"></line-chart>
 
-        <div class="person-list">
+        <div class="person-list" v-if="profileUser.game_history.length !== 0">
           <h1 block>История игр</h1>
           <div v-for="item in profileUser.game_history" style="border: 1px solid black;">
             <a-row>
@@ -81,6 +82,10 @@ export default {
     toRating: function() {
       this.$router.push('/rating');
     },
+    toMain: function() {
+      localStorage.removeItem('session');
+      this.$router.push('/');
+    },
     getMyProfile: function () {
       // получение информации о пользователе
       let profile = getProfile()
@@ -118,17 +123,6 @@ export default {
         this.$message.error('Ошибка получения персонажей');
       }
     }
-  },
-
-  created: async function () {
-    let res = await getGame(localStorage.getItem('session'))
-
-    if (res == false) {
-      this.newGame = true
-    } else {
-      this.newGame = false
-    }
-    console.log("Проверка игры", res)
   },
   mounted() {
     this.getMyProfile();

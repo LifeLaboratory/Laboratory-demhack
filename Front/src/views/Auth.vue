@@ -78,14 +78,18 @@ export default {
     },
   },
   mounted() {
-    let profile = getProfile()
-    if (profile !== false) {
-      this.profileUser = profile;
-      profile.then(val => {
-        this.profileUser = val
-        console.log("Профиль: ", this.profileUser);
-        this.$router.push('/start')
-      });
+    if (localStorage.getItem('session') !== null) {
+      let profile = getProfile()
+      if (profile !== false) {
+        this.profileUser = profile;
+        profile.then(val => {
+          this.profileUser = val
+          console.log("Профиль: ", this.profileUser);
+          if (this.profileUser !== false) {
+            this.$router.push('/start')
+          }
+        });
+      }
     }
   },
 };

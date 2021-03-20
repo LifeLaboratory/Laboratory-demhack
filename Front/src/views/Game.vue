@@ -10,7 +10,7 @@
     <div class="bottom-menu">
       <a-row class="profile-game">
         <a-col :span="5">
-          <a-avatar :size="128" :src="user.pic" style="margin: 15px;"/>
+          <a-avatar :size="128" :src="this.user.pic" style="margin: 15px;"/>
         </a-col>
         <a-col :span="17" class="stats-game" style="font-size: 14pt; padding-bottom: 15px;">
           <table width="100%" border="1" style="font-size: 20pt;">
@@ -46,7 +46,7 @@
         <div class="card-box">
           <div
               style="font-size: 20pt; word-wrap: break-word; padding-left: 10px; padding-right: 10px; padding-top: 50px;">
-            <b>{{ descr }}</b><br />
+            <b v-html="descr"></b><br />
 
             <img :src="pic" style="margin-top: 50px; height: 550px; margin-bottom: 50px;"/>
           </div>
@@ -116,7 +116,7 @@ export default {
       this.right = res.right_answer
 
       this.pic = res.pic
-      this.user.pic = res.pic
+      this.user.pic = res.person_pic
       this.user.name = res.name
       this.user.health = res.health
       this.user.money = res.money
@@ -131,7 +131,7 @@ export default {
         profile.then(val => {
           this.profileUser = val
           console.log("Профиль: ", this.profileUser)
-          this.user.pic = this.profileUser.pic;
+          // this.user.pic = this.profileUser.pic;
           this.user.name = this.profileUser.names;
         });
       }
@@ -148,6 +148,7 @@ export default {
       this.end_game = res.end_game;
 
       this.pic = res.pic
+      this.user.pic = res.person_pic
       this.user.health = res.health
       this.user.money = res.money
       this.user.point = res.point
@@ -160,7 +161,7 @@ export default {
         profile.then(val => {
           this.profileUser = val
           console.log("Профиль: ", this.profileUser)
-          this.user.pic = this.profileUser.pic;
+          // this.user.pic = this.profileUser.pic;
           this.user.name = this.profileUser.names;
         });
       }
@@ -193,6 +194,11 @@ export default {
       this.user.round = res.round
 
       this.dis = false
+
+      if (res.end_game === true) {
+        this.answers = [];
+        this.descr = "К сожалению, для вас, игра окончена!"
+      }
     }
 
   },

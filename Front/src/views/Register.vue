@@ -36,7 +36,7 @@
           </a-form-item>
           <a-form-item style="font-size: 28pt;">
             <a-button type="primary" html-type="submit" class="form-button" style="margin-bottom: 15px;">
-              Зарегестрироваться
+              Зарегистрироваться
             </a-button>
             или
             <router-link to="/auth" style="color: #5a0000">

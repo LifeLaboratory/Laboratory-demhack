@@ -36,6 +36,15 @@
                 <td>...</td>
                 <td>...</td>
               </template>
+              <template v-else-if="item.user_name === profileUser.names">
+                <td style="background: #1b68b380;">{{item.id}}</td>
+                <td style="background: #1b68b380;"><a-avatar :size="64" :src="item.person_pic" /></td>
+                <td style="background: #1b68b380;" @click.prevent="showPersonInfo(item)"><b style="cursor: pointer; text-decoration: underline;">{{item.user_name}}</b></td>
+                <td style="background: #1b68b380;">{{item.health}}</td>
+                <td style="background: #1b68b380;">{{item.money}}</td>
+                <td style="background: #1b68b380;">{{item.round}}</td>
+                <td style="background: #1b68b380;">{{item.point}}</td>
+              </template>
               <template v-else>
                 <td>{{item.id}}</td>
                 <td><a-avatar :size="64" :src="item.person_pic" /></td>
@@ -94,7 +103,7 @@
 </template>
 
 <script>
-  import {getProfileInfo, getRating} from "../api/auth";
+import {getProfile, getProfileInfo, getRating} from "../api/auth";
 
 export default {
   data() {
@@ -130,8 +139,26 @@ export default {
     },
     toProfile: function () {
       this.$router.push('/start');
-    }
-  }
+    },
+    getMyProfile: function () {
+      // получение информации о пользователе
+      let profile = getProfile()
+      console.log(profile);
+      if (profile !== false) {
+        this.profileUser = profile;
+        profile.then(val => {
+          this.profileUser = val
+          console.log("Профиль: ", this.profileUser)
+        });
+      } else {
+        this.$message.error('Ошибка получения профиля');
+      }
+    },
+  },
+  mounted() {
+    this.getMyProfile();
+    this.isLoaded = true;
+  },
 };
 </script>
 <style>
