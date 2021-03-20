@@ -1,10 +1,10 @@
 const axios = require('axios')
 
 export function getGame (session) {
-  return axios.get(`${process.env.VUE_APP_BACKEND}/api/game`,
+  return axios.get(`http://192.168.0.117/api/game`,
     {
       headers: {
-        'Session': session
+        session: session
       }
     })
     .then(function (response) {
@@ -17,11 +17,11 @@ export function getGame (session) {
 }
 
 export function newGame (session, id) {
-  return axios.post(`${process.env.VUE_APP_BACKEND}/api/game`,
+  return axios.post(`http://192.168.0.117/api/game`,
     JSON.stringify( {"id_person": id} ),
     {
       headers: {
-        'Session': session,
+        session: session,
         'Content-Type': 'application/json'
       }
     })
@@ -35,11 +35,11 @@ export function newGame (session, id) {
 }
 
 export function sendAnswer (session, ans) {
-  return axios.post(`${process.env.VUE_APP_BACKEND}/api/game/question`,
-    JSON.stringify( {"answer": ans} ),
+  return axios.post(`http://192.168.0.117/api/game/question`,
+    JSON.stringify( {answer: ans} ),
     {
       headers: {
-        'Session': session,
+        session: session,
         'Content-Type': 'application/json'
       }
     })
@@ -53,10 +53,10 @@ export function sendAnswer (session, ans) {
 }
 
 export function resumeGame (session) {
-  return axios.get(`${process.env.VUE_APP_BACKEND}/api/game`,
+  return axios.get(`http://192.168.0.117/api/game`,
     {
       headers: {
-        'Session': session,
+        session: session,
       }
     })
     .then(function (response) {

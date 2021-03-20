@@ -1,19 +1,21 @@
 <template>
   <div class="game-container">
     <div class="top-menu">
-      <div class="actual-day">
+      <div class="actual-day" style="font-size: 28pt;">
         День - {{ day }}
       </div>
     </div>
 
-    <div class="outer" style="height:80vh; width: 50%; margin-left: 25%" v-if="descr != ''">
+    <div class="outer" style="height:80vh; width: 90%; margin-left: 5%" v-if="descr != ''">
       <div class="inner">
 
 
         <div class="card-box">
           <div
-              style="margin-top: 50px; font-size: 20px; word-wrap: break-word; padding-left: 10px; padding-right: 10px;">
-            <b>{{ descr }}</b>
+              style="font-size: 20pt; word-wrap: break-word; padding-left: 10px; padding-right: 10px; padding-top: 50px;">
+            <b>{{ descr }}</b><br />
+
+            <img :src="pic" style="margin-top: 50px; height: 550px; margin-bottom: 50px;"/>
           </div>
         </div>
         <div style="
@@ -21,21 +23,22 @@
             margin-left: 15%;
             background: rgba(255,255,255,0.8);
             padding-bottom: 15px;
-            height: 90px;
             ">
-          <a-button :disabled="dis" @click="sendAnswer('left')">{{ left }}</a-button>
-          <a-button :disabled="dis" @click="sendAnswer('right')">{{ right }}</a-button>
+          <a-button v-for="(item, index) in this.answers"
+                    style="white-space: normal; display: inline-flex; justify-content: center; width: 48%; font-size: 20pt; height: 100px;" :disabled="dis"
+                    @click="sendAnswer(item.id_event)">
+            {{ item.description }}
+          </a-button>
         </div>
       </div>
     </div>
 
     <div class="bottom-menu">
       <a-row class="profile-game">
-        <a-col :span="4">
-          <a-avatar :size="128" :src="pic"/>
+        <a-col :span="5">
+          <a-avatar :size="128" :src="this.profileUser.pic" style="margin: 15px;"/>
         </a-col>
-        <a-col :span="16" class="stats-game">
-          <div>Профессия: {{ user.name }}</div>
+        <a-col :span="15" class="stats-game" style="font-size: 14pt; padding-bottom: 15px;">
           <div>
             <div style="display: inline-block">
               <a-icon type="heart" theme="twoTone" twoToneColor="#eb2f96"/>
@@ -45,23 +48,16 @@
 
           <div>
             <div style="display: inline-block">
-              <a-icon type="coffee" style="color:rgb(235, 134, 47);"/>
+              <a-icon type="dollar" style="color:rgb(235, 134, 47);"/>
             </div>
-            <a-progress :percent="user.eat" :strokeColor="{  '0%': 'rgb(235, 134, 47)', '100%': 'rgb(235, 134, 47)'}"/>
+            <a-progress :percent="user.money" :strokeColor="{  '0%': 'rgb(235, 134, 47)', '100%': 'rgb(235, 134, 47)'}"/>
           </div>
 
           <div>
             <div style="display: inline-block">
               <a-icon type="smile" theme="twoTone" twoToneColor="rgb(62, 181, 98)"/>
             </div>
-            <a-progress :percent="user.comm" :strokeColor="{  '0%': 'rgb(62, 181, 98)', '100%': 'rgb(62, 181, 98)'}"/>
-          </div>
-
-          <div>
-            <div style="display: inline-block">
-              <a-icon type="home" theme="twoTone" twoToneColor="rgb(59, 47, 235)"/>
-            </div>
-            <a-progress :percent="user.home" :strokeColor="{  '0%': 'rgb(59, 47, 235)', '100%': 'rgb(59, 47, 235)'}"/>
+            <a-progress :percent="user.point" :strokeColor="{  '0%': 'rgb(62, 181, 98)', '100%': 'rgb(62, 181, 98)'}"/>
           </div>
         </a-col>
       </a-row>
@@ -71,6 +67,7 @@
 
 <script>
 import {newGame, reloadGame, sendAnswer, resumeGame} from '@/api/game'
+import {getProfile} from "../api/auth";
 
 export default {
   data() {
@@ -79,9 +76,9 @@ export default {
       user: {
         name: '',
         health: 0,
-        eat: 0,
-        comm: 0,
-        home: 0
+        money: 0,
+        point: 0,
+        round: 0
       },
 
       pic: '',
@@ -113,9 +110,20 @@ export default {
       this.pic = res.pic
       this.user.name = res.name
       this.user.health = res.health
-      this.user.eat = res.food
-      this.user.comm = res.communication
-      this.user.home = res.leisure
+      this.user.money = res.money
+      this.user.point = res.point
+      this.user.round = res.round
+
+      let profile = getProfile()
+      if (profile !== false) {
+        this.profileUser = profile;
+        profile.then(val => {
+          this.profileUser = val
+          console.log("Профиль: ", this.profileUser)
+          this.user.pic = this.profileUser.pic;
+          this.user.name = this.profileUser.names;
+        });
+      }
 
     },
 
@@ -125,13 +133,14 @@ export default {
       this.descr = res.description
       this.left = res.left_answer
       this.right = res.right_answer
+      this.answers = res.answer;
+      console.log(this.answers);
 
       this.pic = res.pic
-      this.user.name = res.name
       this.user.health = res.health
-      this.user.eat = res.food
-      this.user.comm = res.communication
-      this.user.home = res.leisure
+      this.user.money = res.money
+      this.user.point = res.point
+      this.user.round = res.round
     },
 
     async sendAnswer(ans) {
@@ -143,6 +152,7 @@ export default {
         })
         this.$router.push({path: 'start'})
       }
+      console.log(res);
       console.log(res.health)
       console.log(this.user.health)
       console.log(res.health - this.user.health)
@@ -152,37 +162,44 @@ export default {
       let Scomm = res.communication - this.user.comm
       let Shome = res.leisure - this.user.home
 
-      this.$message.info(`Отчет за ${this.day} день`);
-      setTimeout(() => {
-        this.$message.info(`Жизни: ${Shealth}`)
-      }, 1000)
-      setTimeout(() => {
-        this.$message.info(`Еда: ${Seat}`)
-      }, 1500)
-      setTimeout(() => {
-        this.$message.info(`Общение: ${Scomm}`)
-      }, 2000)
-      setTimeout(() => {
-        this.$message.info(`Досуг: ${Shome}`)
-      }, 2500)
-
-
       this.day = res.round
       this.descr = res.description
       this.left = res.left_answer
       this.right = res.right_answer
 
 
-      this.user.name = res.name
-      this.user.health = res.health
-      this.user.eat = res.food
-      this.user.comm = res.communication
-      this.user.home = res.leisure
+      let profile = getProfile()
+      if (profile !== false) {
+        this.profileUser = profile;
+        profile.then(val => {
+          this.profileUser = val
+          console.log("Профиль: ", this.profileUser.pic);
+          this.user.pic = this.profileUser.pic;
+          this.user.name = this.profileUser.names;
+          this.user.health = this.profileUser.health;
+          this.user.money = this.profileUser.money;
+          this.user.point = this.profileUser.point;
+          this.user.round = this.profileUser.round;
+        });
+      }
+
       this.dis = false
     }
 
   },
   mounted() {
+
+    let profile = getProfile()
+    if (profile !== false) {
+      this.profileUser = profile;
+      profile.then(val => {
+        this.profileUser = val
+        console.log("Профиль: ", this.profileUser.pic);
+        this.user.pic = this.profileUser.pic;
+        this.user.name = this.profileUser.names;
+      });
+    }
+
     let type = this.$route.query.type
     if (type === 'resume') {
       this.resumeGame()
@@ -241,7 +258,6 @@ export default {
 
 .card-box {
   width: 70%;
-  height: 300px;
   background: rgba(255, 255, 255, 0.8);
 }
 
