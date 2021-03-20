@@ -7,6 +7,10 @@ def header_option():
     # return {'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': '*', 'Access-Control-Allow-Methods': '*'}
 
 
+def make_response(data):
+    return data, header_option()
+
+
 def create_session(id_user):
     return Session().create(id_user)[0]
 

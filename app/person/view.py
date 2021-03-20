@@ -1,7 +1,8 @@
 from flask import request, jsonify
 from app import app
 from app.person.processor import Processor
-from app.base.helper import header_option
+from app.base.helper import make_response
+
 
 PREFIX = '/api/person'
 
@@ -19,4 +20,4 @@ def all_person():
         'communication': 4.0,  # Общение
         'value': 3,  # количество денег
     }
-    return jsonify(Processor().all_person()), header_option()
+    return make_response(jsonify(Processor().all_person()))
