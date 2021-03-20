@@ -2,24 +2,12 @@
 <a-row type="flex" justify="center" v-if="isLoaded">
   <a-col :span="20">
       <div class="box">
-        <h2>Рейтинг</h2>
+        <h2 style="font-size: 28pt;">Рейтинг</h2>
         <div class="button-group">
-          <a-button block v-on:click="toProfile()">Вернуться в профиль</a-button>
+          <a-button block v-on:click="toProfile()" style="font-size: 18pt; height: 60px">Вернуться в профиль</a-button>
         </div>
         <div class="rating-list">
           <table width="100%" border="1"  style="font-size: 16pt; margin-top: 15px;">
-<!--            id - номер в рейтинге
-point - количество баллов
-health - кол-во жизней
-money - кол-во денег
-round - на каком раунде проиграл
-id_user - Идентификатор юзера, для перехода в его профиль (не выводить)
-id - порядковый номер
-user_name - имя пользователя
-user_pic - Картинка юзера пока не выводить
-person_name - Имя героя за которого играл
-person_descr - Описание героя
-person_pic - Изображение героя -->
             <tr>
               <th>№</th>
               <th>Персонаж</th>
@@ -29,14 +17,34 @@ person_pic - Изображение героя -->
               <th>Количество раундов</th>
               <th>Очков</th>
             </tr>
-            <tr v-for="item in this.rating">
-              <td>{{item.id}}</td>
-              <td><a-avatar :size="64" :src="item.person_pic" /></td>
-              <td @click.prevent="showPersonInfo(item)"><b style="cursor: pointer; text-decoration: underline;">{{item.user_name}}</b></td>
-              <td>{{item.health}}</td>
-              <td>{{item.money}}</td>
-              <td>{{item.round}}</td>
-              <td>{{item.point}}</td>
+            <tr v-for="(item, index) in this.rating">
+              <template v-if="index < 20">
+                <td>{{item.id}}</td>
+                <td><a-avatar :size="64" :src="item.person_pic" /></td>
+                <td @click.prevent="showPersonInfo(item)"><b style="cursor: pointer; text-decoration: underline;">{{item.user_name}}</b></td>
+                <td>{{item.health}}</td>
+                <td>{{item.money}}</td>
+                <td>{{item.round}}</td>
+                <td>{{item.point}}</td>
+              </template>
+              <template v-else-if="rating.length === 25 && index === 20">
+                <td>...</td>
+                <td></td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+                <td>...</td>
+              </template>
+              <template v-else>
+                <td>{{item.id}}</td>
+                <td><a-avatar :size="64" :src="item.person_pic" /></td>
+                <td @click.prevent="showPersonInfo(item)"><b style="cursor: pointer; text-decoration: underline;">{{item.user_name}}</b></td>
+                <td>{{item.health}}</td>
+                <td>{{item.money}}</td>
+                <td>{{item.round}}</td>
+                <td>{{item.point}}</td>
+              </template>
             </tr>
           </table>
         </div>

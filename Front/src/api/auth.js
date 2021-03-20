@@ -45,7 +45,12 @@ export function getPerson() {
 }
 
 export function getRating() {
-    return axios.get(`http://192.168.0.117/api/rating`)
+    return axios.get(`http://192.168.0.117/api/rating`,
+        {
+            headers: {
+                session: localStorage.getItem('session')
+            }
+        })
         .then(function (response) {
             console.log(response)
             return response.data
@@ -74,7 +79,7 @@ export function getProfile() {
 }
 
 export function getProfileInfo(id_user) {
-    return axios.get(`${process.env.VUE_APP_BACKEND}/api/user/` + id_user,
+    return axios.get(`http://192.168.0.117/api/user/` + id_user,
         {
             headers: {
                 session: localStorage.getItem('session')
