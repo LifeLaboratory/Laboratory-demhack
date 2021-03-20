@@ -121,6 +121,7 @@ response:
 {
   'id_question': int,
   'description': str,
+  'pic': str,
   'answer': [
     { 
       'id': int,
@@ -134,6 +135,13 @@ response:
   'health': int,   # Здоровье
   'money': int,    # Деньги
   'point': int, # количество очков
+  'event': {
+    'id_event': int, # Номер эвента
+    'description': text, # Описание эвента
+    'money': int, # Сколько денег списать
+    'health': int, # Сколько здоровья отнять
+    'point': int, # Сколько баллов отнимаем
+  }
 }
 
 -> POST /api/game # Запуск новой игры
