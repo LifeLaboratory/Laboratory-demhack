@@ -1,6 +1,7 @@
 <template>
   <div class="game-container">
     <div class="top-menu">
+      <a-button v-on:click="toProfile()" style=" float: left; font-size: 14pt; height: 60px">В профиль</a-button>
       <div class="actual-day" style="font-size: 28pt;">
         День - {{ day }}
       </div>
@@ -95,6 +96,10 @@ export default {
     }
   },
   methods: {
+    toProfile: function () {
+      this.$router.push('/start');
+    },
+
     async startNewGame() {
       let id = this.$route.query.id
       if (!id) {

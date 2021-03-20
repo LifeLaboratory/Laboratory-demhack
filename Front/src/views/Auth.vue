@@ -50,7 +50,7 @@
 </template>
 
 <script>
-import {authUser} from "../api/auth";
+import {authUser, getProfile} from "../api/auth";
 
 export default {
   beforeCreate() {
@@ -76,6 +76,17 @@ export default {
         }
       });
     },
+  },
+  mounted() {
+    let profile = getProfile()
+    if (profile !== false) {
+      this.profileUser = profile;
+      profile.then(val => {
+        this.profileUser = val
+        console.log("Профиль: ", this.profileUser);
+        this.$router.push('/start')
+      });
+    }
   },
 };
 </script>
