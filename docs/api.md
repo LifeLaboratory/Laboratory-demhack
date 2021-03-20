@@ -126,9 +126,6 @@ response:
     { 
       'id': int,
       'description': str,
-      'health': int,   # Здоровье
-      'point': int, # количество очков
-      'money': int, # количество денег
     },
   ],
   'round': int, # Номер раунда игры
@@ -161,9 +158,6 @@ response
     { 
       'id': int,
       'description': str,
-      'health': int,   # Здоровье
-      'point': int, # количество очков
-      'money': int, # количество денег
     },
   ],
   'round': int, # Номер раунда игры
