@@ -17,7 +17,7 @@ class Processor:
             return ratings
         for now_id in range(len(users_ratings)):
             if users_ratings[now_id].get('id_user') == user_id and now_id > 19:
-                my_user_pos = now_id
+                my_user_pos = now_id + 1
                 break
         if my_user_pos is None:
             return ratings

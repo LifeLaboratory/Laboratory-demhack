@@ -28,7 +28,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 body {
-  background: url('/img/background.jpg') no-repeat;
+  background: url('/img/background.jpg') 100% 100%;
   background-size: cover;
   backdrop-filter: opacity(0.5) blur(3px);
 }

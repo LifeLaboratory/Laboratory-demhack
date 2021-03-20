@@ -32,11 +32,13 @@
                     <th>Информационное здоровье</th>
                     <th>Деньги</th>
                     <th>Очки</th>
+                    <th>Прожито дней</th>
                   </tr>
                   <tr>
                     <td>{{item.health}}</td>
                     <td>{{item.money}}₽</td>
                     <td>{{item.point}}</td>
+                    <td>{{item.round}}</td>
                   </tr>
                 </table>
               </a-col>
