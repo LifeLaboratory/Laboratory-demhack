@@ -10,7 +10,6 @@ PREFIX = '/api/game'
 @app.route(PREFIX, methods=['GET', 'POST', 'OPTIONS'])
 def get_game_info():
     if request.method == 'OPTIONS':
-        print(request.method)
         return make_response(jsonify({}))
     if request.method == 'GET':
         id_user = session_to_id_user(request.headers)
@@ -24,7 +23,6 @@ def get_game_info():
 @app.route(PREFIX + '/question', methods=['POST', 'OPTIONS'])
 def send_game_answer():
     if request.method == 'OPTIONS':
-        print(request.method)
         return make_response(jsonify({}))
 
     json_data = request.json

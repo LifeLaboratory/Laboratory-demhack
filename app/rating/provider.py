@@ -15,7 +15,7 @@ class Provider(bp.Provider):
       from game
   )
   select
-    g.point as point
+    coalesce(g.point, 0) as point
     , g.health as health
     , g.money as money
     , g.round as round
@@ -31,7 +31,7 @@ class Provider(bp.Provider):
   join lateral (
       select
         health
-        , point
+        , coalesce(point, 0) as point
         , money
         , id_person
         , time_close
@@ -42,6 +42,6 @@ class Provider(bp.Provider):
       limit 1
   ) g on True
   join person p on (g.id_person = p.id_person)
-  order by g.point desc
+  order by coalesce(g.point, 0) desc
 '''
         return self.execute()

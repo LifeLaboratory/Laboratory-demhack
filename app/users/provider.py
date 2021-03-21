@@ -31,8 +31,10 @@ class Provider(bp.Provider):
     def login(self, data):
         where = f'''
   where true
-    and '{data.get('login')}' = "login"
-    and '{data.get('password')}' = "password"
+    and ('{data.get('login')}' 
+      = "login")
+    and ('{data.get('password')}' 
+      = "password")
   limit 1
         '''
         user = self.users(where)
@@ -75,9 +77,9 @@ game_history as (
     select id_game
          , time_close as time
          , round
-         , g.health
-         , g.money
-         , g.point
+         , coalesce(g.health, 0) as health
+         , coalesce(g.money, 0) as money
+         , coalesce(g.point, 0) as point
          , p.pic
          , p.name
     from game g
