@@ -78,16 +78,10 @@
             <table width="100%" border="1">
               <tr>
                 <th>Здоровье</th>
-                <th>Питание</th>
-                <th>Досуг</th>
-                <th>Общение</th>
                 <th>Очки</th>
               </tr>
               <tr>
                 <td>{{item.health}}</td>
-                <td>{{item.food}}</td>
-                <td>{{item.leisure}}</td>
-                <td>{{item.communication}}</td>
                 <td>{{item.point}}</td>
               </tr>
             </table>
