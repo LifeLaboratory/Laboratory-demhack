@@ -21,7 +21,7 @@
       </a-row>
     </div>
 
-    <div class="outer" style="height:80vh; width: 90%; margin-left: 5%" v-if="descr != ''">
+    <div class="outer" style="height:80vh; width: 100%;" v-if="descr != ''">
       <div class="inner">
 
 
@@ -30,17 +30,16 @@
               style="font-size: 20pt; word-wrap: break-word; padding-left: 10px; padding-right: 10px; padding-top: 50px;">
             <b v-html="descr"></b><br />
 
-            <img :src="pic" style="margin-top: 50px; height: 550px; margin-bottom: 50px;"/>
+            <img :src="pic" style="margin-top: 50px; max-height: 500px; margin-bottom: 50px;"/>
           </div>
         </div>
         <div style="
             width: 70%;
             margin-left: 15%;
             background: rgba(255,255,255,0.8);
-            padding-bottom: 15px;
             ">
           <a-button v-for="(item, index) in this.answers"
-                    style="white-space: normal; display: inline-flex; justify-content: center; width: 48%; font-size: 20pt; height: 100px;" :disabled="dis"
+                    style="white-space: normal; justify-content: center; width: 100%; min-height: 100px;" :disabled="dis"
                     @click="sendAnswer(item.id_event)">
             {{ item.description }}
           </a-button>
