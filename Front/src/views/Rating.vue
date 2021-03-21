@@ -10,17 +10,17 @@
           <table width="100%" border="1"  style="margin-top: 15px;">
             <tr>
               <th>№</th>
-              <th>Персонаж</th>
-              <th>Имя</th>
-              <th>Информационное здоровье</th>
-              <th>Деньги</th>
-              <th>Количество раундов</th>
-              <th>Очков</th>
+              <th><a-icon slot="prefix" type="qq" title="Персонаж" /></th>
+              <th><a-icon slot="prefix" type="user" title="Логин" /></th>
+              <th><a-icon slot="prefix" type="dashboard" title="Информационное здоровь" /></th>
+              <th><a-icon slot="prefix" type="dollar" title="Деньги" /></th>
+              <th><a-icon slot="prefix" type="retweet" title="Количество раундов" /></th>
+              <th><a-icon slot="prefix" type="star" title="Очков" /></th>
             </tr>
             <tr v-for="(item, index) in this.rating">
               <template v-if="index < 20">
                 <td>{{item.id}}</td>
-                <td><a-avatar :size="48" :src="item.person_pic" /></td>
+                <td><a-avatar :size="64" :src="item.person_pic" /></td>
                 <td @click.prevent="showPersonInfo(item)"><b style="cursor: pointer; text-decoration: underline;">{{item.user_name}}</b></td>
                 <td>{{item.health}}</td>
                 <td>{{item.money}}</td>
