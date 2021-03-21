@@ -38,7 +38,7 @@
             ">
           <a-button v-for="(item, index) in this.answers"
                     style="white-space: normal; justify-content: center; width: 100%; min-height: 100px;" :disabled="dis"
-                    @click="sendAnswer(item.id_event)">
+                    @click="sendAnswer(index)">
             {{ item.description }}
           </a-button>
         </div>
@@ -125,6 +125,8 @@ export default {
       this.right = res.right_answer
       this.answers = res.answer;
       this.end_game = res.end_game;
+
+      console.log(this.answers);
 
       this.pic = res.pic
       this.user.pic = res.person_pic
