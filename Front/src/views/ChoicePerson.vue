@@ -1,17 +1,17 @@
 <template>
 <a-row type="flex" justify="center">
-  <a-col :span="12">
+  <a-col :span="24">
       <div class="box">
          <h1>Выберите персонажа</h1>
         <a-row>
-         <a-col :span="12"  :gutter="10" v-for="(el, key) in profile">
+         <a-col :span="24"  :gutter="10" v-for="(el, key) in profile">
           <a-card hoverable @click="selectPerson(key)" style="height:320px; width: 90%; margin-left: 5%; margin-top: 25px;">
 
             <img
               alt="example"
               :src="el.pic"
               style="height: 100px"
-            />
+            /><br />
             <a-card-meta :title="el.name" style="height: 80px;">
               <template slot="description">{{el.description}}</template>
             </a-card-meta>

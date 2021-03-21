@@ -7,18 +7,16 @@
     </div>
 
     <div class="bottom-menu">
-      <a-row class="profile-game">
-        <a-col :span="3">
+        <a-row :span="3">
           <a-avatar :size="64" :src="this.user.pic" style="margin: 15px;"/>
-        </a-col>
-        <a-col :span="24" class="stats-game" style="font-size: 14pt; padding-bottom: 15px;">
+        </a-row>
+        <a-row :span="24" class="stats-game" style="font-size: 14pt; padding-bottom: 15px;">
           <div>Информационное здоровье: {{user.health}}</div>
           <div>Деньги: {{user.money}}₽</div>
           <div>Очки: {{user.point}}</div>
           <div>Прожито дней: {{user.round}}</div>
           <a-button v-on:click="toProfile()" style=" float: left; font-size: 14pt; margin-top: 15px; height: 60px">В профиль</a-button>
-        </a-col>
-      </a-row>
+        </a-row>
     </div>
 
     <div class="outer" style="height:80vh; width: 100%;" v-if="descr != ''">
@@ -30,12 +28,12 @@
               style="font-size: 20pt; word-wrap: break-word; padding-left: 10px; padding-right: 10px; padding-top: 50px;">
             <b v-html="descr"></b><br />
 
-            <img :src="pic" style="margin-top: 50px; max-height: 500px; margin-bottom: 50px;"/>
+            <img :src="pic" style="margin-top: 50px; max-height: 500px; max-width: 100%; margin-bottom: 50px;"/>
           </div>
         </div>
         <div style="
-            width: 70%;
-            margin-left: 15%;
+            width: 90%;
+            margin-left: 5%;
             background: rgba(255,255,255,0.8);
             ">
           <a-button v-for="(item, index) in this.answers"
@@ -253,7 +251,7 @@ export default {
 }
 
 .card-box {
-  width: 70%;
+  width: 90%;
   background: rgba(255, 255, 255, 0.8);
 }
 
@@ -290,8 +288,6 @@ export default {
   border: solid 1.2px black;
   border-radius: 5px 5px 0px 0px;
   left: 25%;
-  width: 50%;
-  min-width: 550px;
   background: rgba(255, 255, 255, 0.8);
   margin: 50px auto 0;
 }
