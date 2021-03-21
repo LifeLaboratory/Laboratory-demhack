@@ -34,8 +34,6 @@ class Provider:
         return self.exec(query, params)
 
     def execute(self):
-        if os.environ["IS_DEBUG"]:
-            print(self.query)
         return self.exec(self.query)
 
     @staticmethod
@@ -130,7 +128,8 @@ class Provider:
                     if alert in v:
                         args[k] = args[k].replace(alert, '')
         query = query.format(**args)
-        print(query)
+        if os.environ["IS_DEBUG"]:
+            print(query)
         return Provider._exec(query)
 
     @staticmethod

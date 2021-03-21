@@ -8,7 +8,7 @@ __author__ = 'Крылосов А.А.'
 class Event:
 
     def __init__(self):
-        self.db = Provider('app/event/sql')
+        self.db = Provider('./event/sql')
 
     def insert_event(self, parameters):
         self.db.exec_by_file('insert_event.sql', parameters)
