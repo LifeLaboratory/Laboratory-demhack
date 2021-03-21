@@ -1,13 +1,13 @@
 <template>
 <a-row type="flex" justify="center" v-if="isLoaded">
-  <a-col :span="20">
+  <a-col :span="24">
       <div class="box">
         <h2 style="font-size: 28pt;">Рейтинг</h2>
         <div class="button-group">
-          <a-button block v-on:click="toProfile()" style="font-size: 18pt; height: 60px">Вернуться в профиль</a-button>
+          <a-button block v-on:click="toProfile()" style="font-size: 16pt; height: 60px">Вернуться в профиль</a-button>
         </div>
         <div class="rating-list">
-          <table width="100%" border="1"  style="font-size: 16pt; margin-top: 15px;">
+          <table width="100%" border="1"  style="margin-top: 15px;">
             <tr>
               <th>№</th>
               <th>Персонаж</th>
@@ -20,7 +20,7 @@
             <tr v-for="(item, index) in this.rating">
               <template v-if="index < 20">
                 <td>{{item.id}}</td>
-                <td><a-avatar :size="64" :src="item.person_pic" /></td>
+                <td><a-avatar :size="48" :src="item.person_pic" /></td>
                 <td @click.prevent="showPersonInfo(item)"><b style="cursor: pointer; text-decoration: underline;">{{item.user_name}}</b></td>
                 <td>{{item.health}}</td>
                 <td>{{item.money}}</td>

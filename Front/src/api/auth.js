@@ -1,7 +1,7 @@
 const axios = require('axios')
 
 export function registerUser(data) {
-    return axios.post(`http://90.189.213.170:13452/api/user/register`, JSON.stringify(data),
+    return axios.post(`http://192.168.0.117:13452/api/user/register`, JSON.stringify(data),
         {
             headers: {
                 'Content-Type': 'application/json'
@@ -17,7 +17,7 @@ export function registerUser(data) {
 }
 
 export function authUser(data) {
-    return axios.post(`http://90.189.213.170:13452/api/user/login`, JSON.stringify(data),
+    return axios.post(`http://192.168.0.117:13452/api/user/login`, JSON.stringify(data),
         {
             headers: {
                 'Content-Type': 'application/json'
@@ -34,7 +34,7 @@ export function authUser(data) {
 }
 
 export function getPerson() {
-    return axios.get(`http://90.189.213.170:13452/api/person`)
+    return axios.get(`http://192.168.0.117:13452/api/person`)
         .then(function (response) {
             return response.data
         })
@@ -45,7 +45,7 @@ export function getPerson() {
 }
 
 export function getRating() {
-    return axios.get(`http://90.189.213.170:13452/api/rating`,
+    return axios.get(`http://192.168.0.117:13452/api/rating`,
         {
             headers: {
                 session: localStorage.getItem('session')
@@ -62,7 +62,7 @@ export function getRating() {
 }
 
 export function getProfile() {
-    return axios.get(`http://90.189.213.170:13452/api/user/profile`,
+    return axios.get(`http://192.168.0.117:13452/api/user/profile`,
         {
             headers: {
                 session: localStorage.getItem('session')
@@ -79,7 +79,7 @@ export function getProfile() {
 }
 
 export function getProfileInfo(id_user) {
-    return axios.get(`http://90.189.213.170:13452/api/user/` + id_user,
+    return axios.get(`http://192.168.0.117:13452/api/user/` + id_user,
         {
             headers: {
                 session: localStorage.getItem('session')

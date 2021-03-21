@@ -1,15 +1,15 @@
 <template>
 <a-row type="flex" justify="center" v-if="isLoaded">
-  <a-col :span="20">
+  <a-col :span="24">
       <div class="box profile">
         <a-row class="title-profile">
           <a-col :span="8">
-            <a-avatar :size="128" :src="this.profileUser.pic" />
+            <a-avatar :size="96" :src="this.profileUser.pic" />
           </a-col>
           <a-col :span="16" class="mini-rating">
             <div style="font-size: 20pt">Имя: {{profileUser.names}}</div>
             <div style="font-size: 20pt">Игр сыграно: {{profileUser.count_game}}</div>
-            <div style="font-size: 20pt">Максимально прожито дней: {{profileUser.max_point}}</div>
+            <div style="font-size: 20pt">Максимально дней: {{profileUser.max_point}}</div>
           </a-col>
         </a-row>
         <div class="button-group">
@@ -31,7 +31,7 @@
                 <h3>{{item.name}}</h3>
               </a-col>
               <a-col :span="20">
-                <table width="100%" border="1" style="font-size: 20pt;">
+                <table width="100%" border="1">
                   <tr>
                     <th>Информационное здоровье</th>
                     <th>Деньги</th>

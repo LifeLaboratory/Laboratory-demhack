@@ -1,7 +1,6 @@
 <template>
   <div class="game-container">
     <div class="top-menu">
-      <a-button v-on:click="toProfile()" style=" float: left; font-size: 14pt; height: 60px">В профиль</a-button>
       <div class="actual-day" style="font-size: 28pt;">
         День - {{ day }}
       </div>
@@ -9,32 +8,15 @@
 
     <div class="bottom-menu">
       <a-row class="profile-game">
-        <a-col :span="5">
-          <a-avatar :size="128" :src="this.user.pic" style="margin: 15px;"/>
+        <a-col :span="3">
+          <a-avatar :size="64" :src="this.user.pic" style="margin: 15px;"/>
         </a-col>
-        <a-col :span="17" class="stats-game" style="font-size: 14pt; padding-bottom: 15px;">
-          <table width="100%" border="1" style="font-size: 20pt;">
-            <tr>
-              <th style="padding: 5px;">
-                <center>Информационное здоровье</center>
-              </th>
-              <th style="padding: 5px;">
-                <center>Деньги</center>
-              </th>
-              <th style="padding: 5px;">
-                <center>Очки</center>
-              </th>
-              <th style="padding: 5px;">
-                <center>Прожито дней</center>
-              </th>
-            </tr>
-            <tr>
-              <td style="padding: 5px;"><center>{{user.health}}</center></td>
-              <td style="padding: 5px;"><center>{{user.money}}₽</center></td>
-              <td style="padding: 5px;"><center>{{user.point}}</center></td>
-              <td style="padding: 5px;"><center>{{user.round}}</center></td>
-            </tr>
-          </table>
+        <a-col :span="24" class="stats-game" style="font-size: 14pt; padding-bottom: 15px;">
+          <div>Информационное здоровье: {{user.health}}</div>
+          <div>Деньги: {{user.money}}₽</div>
+          <div>Очки: {{user.point}}</div>
+          <div>Прожито дней: {{user.round}}</div>
+          <a-button v-on:click="toProfile()" style=" float: left; font-size: 14pt; margin-top: 15px; height: 60px">В профиль</a-button>
         </a-col>
       </a-row>
     </div>
