@@ -19,7 +19,12 @@
             </tr>
             <tr v-for="(item, index) in this.rating">
               <template v-if="index < 20">
-                <td>{{item.id}}</td>
+                <td>
+                  <img src="../assets/cup1.png" v-if="index === 0" style="width: 24px; margin: 3px;" />
+                  <img src="../assets/cup2.png" v-else-if="index === 1" style="width: 24px; margin: 3px;" />
+                  <img src="../assets/cup3.png" v-else-if="index === 2" style="width: 24px; margin: 3px;" />
+                  <template v-else>{{item.id}}</template>
+                </td>
                 <td><a-avatar :size="64" :src="item.person_pic" /></td>
                 <td @click.prevent="showPersonInfo(item)"><b style="cursor: pointer; text-decoration: underline;">{{item.user_name}}</b></td>
                 <td>{{item.health}}</td>

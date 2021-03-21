@@ -28,7 +28,12 @@
               style="font-size: 20pt; word-wrap: break-word; padding-left: 10px; padding-right: 10px; padding-top: 50px;">
             <b v-html="descr"></b><br />
 
-            <img :src="pic" style="margin-top: 50px; max-height: 500px; max-width: 100%; margin-bottom: 50px;"/>
+            <img :src="pic" style="margin-top: 50px; max-height: 500px; max-width: 100%; margin-bottom: 50px;" v-if="pic"/>
+
+            <img src="../assets/confetti-4.gif" style="margin-top: 15px; max-height: 500px; width: 90%; margin-bottom: 15px;" v-if="this.show_fire"/>
+            <a-button @click="toRating" v-if="this.show_btn"
+                      style="white-space: normal; justify-content: center; width: 100%; min-height: 100px; margin-bottom: 15px;"
+                      block>Рейтинг</a-button>
           </div>
         </div>
         <div style="
@@ -70,13 +75,19 @@ export default {
       right: '',
       descr: '',
 
-      leftAction: {}
+      leftAction: {},
+
+      show_btn: false,
+      show_fire: false
 
     }
   },
   methods: {
     toProfile: function () {
       this.$router.push('/start');
+    },
+    toRating: function() {
+      this.$router.push('/rating');
     },
 
     async startNewGame() {
@@ -93,6 +104,7 @@ export default {
       this.descr = res.description
       this.left = res.left_answer
       this.right = res.right_answer
+      this.pic = false;
 
       this.pic = res.pic
       this.user.pic = res.person_pic
@@ -176,9 +188,19 @@ export default {
 
       this.dis = false
 
+      if (res.good_description !== undefined) {
+        this.$message.info(res.good_description);
+      }
+
       if (res.end_game === true) {
         this.answers = [];
-        this.descr = "К сожалению, для вас, игра окончена!"
+        this.show_btn = true;
+        if (this.user.health > 0 && this.user.money > 0) {
+          this.show_fire = true;
+          this.descr = "Игра окончена! Вы хорошо подготовлены!<br /><br />"
+        } else {
+          this.descr = "Вы проиграли, вам стоит подтянуть знания по информационной безопасности!<br /><br />"
+        }
       }
     }
 

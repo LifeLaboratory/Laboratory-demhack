@@ -14,6 +14,8 @@
 
 <script>
 import HelloWorld from '@/components/HelloWorld.vue'
+// import aituBridge from '@btsd/aitu-bridge';
+// import {authUser, registerUser} from "../api/auth";
 
 export default {
   name: 'Home',
@@ -23,7 +25,38 @@ export default {
   methods: {
     toAuth(e) {
       this.$router.push('/auth')
-    },
+    }
+    // async toAuth(e) {
+    //   try {
+    //     const profile = await aituBridge.getMe();
+    //     if (profile.name !== undefined) {
+    //       let login = profile.name + " " + profile.lastname;
+    //       let password = profile.id;
+    //       let res = await registerUser({"login": login, "password": password})
+    //       if (res.error === undefined) {
+    //         console.log(res);
+    //         localStorage.setItem('session', res.session);
+    //         await this.$router.push('/start')
+    //       } else {
+    //         // this.$message.error('Пользователь с таким именем уже существует');
+    //
+    //         let res = await authUser({"login": login, "password": password})
+    //         if (res.error) {
+    //           return
+    //         }
+    //         if (res !== false) {
+    //           localStorage.setItem('session', res.session)
+    //           await this.$router.push('/start')
+    //         }
+    //       }
+    //     } else {
+    //       await this.$router.push('/auth')
+    //     }
+    //   } catch (e) {
+    //     console.log(e);
+    //     await this.$router.push('/start')
+    //   }
+    // },
   },
 }
 </script>
