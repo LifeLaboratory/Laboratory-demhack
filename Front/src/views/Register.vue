@@ -62,7 +62,7 @@ export default {
         if (!err) {
           console.log('Received values of form: ', values);
           let res = await authApi.registerUser(values)
-          if (res != null) {
+          if (res.error === undefined) {
             console.log(res);
             localStorage.setItem('session', res.session);
             this.$router.push('/start')
